@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#F7F3E8"><title>나의 주간 플래너</title></head>
+<body>
+<header class="page-header"><span>MY WEEKLY PLANNER</span><span id="save-status" role="status">이 브라우저에 자동 저장</span></header>
+<main class="planner">
+<aside class="sidebar">
+<h1><input id="name" aria-label="이름" placeholder="이름" maxlength="24" autocomplete="off"><span>의 플래너</span></h1>
+<section class="todos-section"><div class="section-heading"><h2>일주일 해야 할 일</h2><span id="todo-count">0 / 0</span></div><p class="hint">이번 주에 집중하고 싶은 일을 적어보세요.</p><ul id="todos"></ul><form id="todo-form"><input id="new-todo" aria-label="새 할 일" placeholder="새로운 할 일" maxlength="200" required><button type="submit">추가</button></form></section>
+<section class="notes-section"><div class="section-heading"><h2>보완할 점</h2><span class="small-label">WEEKLY NOTES</span></div><textarea id="notes" aria-label="보완할 점" placeholder="한 주를 돌아보며, 다음 주의 나에게."></textarea></section>
+<p class="sidebar-foot">작은 계획을 모아, 나다운 한 주.</p>
+</aside>
+<section class="schedule-section"><div class="schedule-top"><div><p class="eyebrow">PLAN · DO · REFLECT</p><h2>일주일 Tracking</h2></div><button id="today">이번 주</button></div><nav class="week-nav" aria-label="주 이동"><button id="prev" aria-label="이전 주">← 이전 주</button><h3 id="week-range"></h3><button id="next" aria-label="다음 주">다음 주 →</button></nav><div class="calendar-scroll"><div class="calendar"><div id="day-headings" class="day-headings"></div><div class="time-grid"><div id="time-axis"></div><div id="days" class="days"></div></div></div></div><div class="calendar-foot"><span>빈 시간대를 눌러 일정을 추가하세요.</span><span>08:00 — 24:00 · 30분 단위</span></div></section>
+</main>
+<dialog id="event-dialog"><form id="event-form"><div class="dialog-heading"><h2 id="dialog-title">일정 추가</h2><button type="button" id="close-dialog" aria-label="닫기">닫기</button></div><p id="event-date" class="hint"></p><label>일정 제목<input id="event-title" required maxlength="120" placeholder="어떤 시간을 보내고 싶나요?"></label><div class="time-fields"><label>시작 시간<select id="start-time"></select></label><label>종료 시간<select id="end-time"></select></label></div><p id="event-error" role="alert"></p><div class="dialog-actions"><button type="button" id="delete-event">삭제</button><div><button type="button" id="cancel-event">취소</button><button type="submit" class="primary">저장</button></div></div></form></dialog>
+<script type="module" src="/src/main.js"></script></body></html>
