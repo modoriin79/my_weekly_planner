@@ -5,11 +5,11 @@ test('일정 추가·수정·삭제, 완료, 주별 저장과 새로고침',asyn
  await page.getByLabel('새 할 일').fill('책 읽기');await page.getByRole('button',{name:'추가',exact:true}).click();
  await page.getByLabel('할 일 수정').fill('책 한 권 읽기');await page.getByLabel('책 한 권 읽기 완료',{exact:true}).check();
  await page.getByLabel('보완할 점',{exact:true}).fill('꾸준히 기록하기\n잠 충분히 자기');
- await page.getByRole('button',{name:'월요일 08:00 일정 추가',exact:true}).click();
+ await page.getByRole('button',{name:'월요일 07:00 일정 추가',exact:true}).click();
  await page.getByLabel('일정 제목',{exact:true}).fill('아침 독서');
  await page.getByLabel('시작 시간').selectOption('600');await page.getByLabel('종료 시간').selectOption('540');await page.getByRole('button',{name:'저장',exact:true}).click();await expect(page.getByRole('alert')).toContainText('늦어야');
- await page.getByLabel('시작 시간').selectOption('480');await page.getByLabel('종료 시간').selectOption('570');await page.getByRole('button',{name:'저장',exact:true}).click();
- await expect(page.locator('.event')).toHaveCSS('height','116px');
+ await page.getByLabel('시작 시간').selectOption('420');await page.getByLabel('종료 시간').selectOption('510');await page.getByRole('button',{name:'저장',exact:true}).click();
+ await expect(page.locator('.event')).toHaveCSS('height','77px');
  await page.getByRole('button',{name:'아침 독서 수정'}).click();await page.getByLabel('일정 제목',{exact:true}).fill('아침 공부');await page.getByRole('button',{name:'저장',exact:true}).click();
  await page.getByLabel('아침 공부 완료').check();await expect(page.locator('.event')).toHaveClass(/done/);
  await page.getByRole('button',{name:'다음 주',exact:true}).click();await expect(page.locator('.event')).toHaveCount(0);await expect(page.getByLabel('보완할 점',{exact:true})).toHaveValue('');await expect(page.locator('.todo-row')).toHaveCount(0);
