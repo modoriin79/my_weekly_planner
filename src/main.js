@@ -358,12 +358,12 @@ function renderCalendar() {
     const col = el('div', { className: 'day-column' });
     for (let m = 420; m < 1440; m += 30) { const slot = el('button', { className: 'slot' }); slot.setAttribute('aria-label', `${day}요일 ${time(m)} 일정 추가`); slot.onclick = () => openEvent(i, m); col.append(slot); }
     for (const { event, lane, group } of layout(week().events.filter((e) => e.day === i))) {
-      const box = el('div', { className: 'event' + (event.done ? ' done' : '') });
-      box.style.cssText = `top:${(event.start - 420) / 30 * SLOT_HEIGHT + 2}px;height:${(event.end - event.start) / 30 * SLOT_HEIGHT - 4}px;left:calc(${lane / group.count * 100}% + 3px);width:calc(${100 / group.count}% - 6px)`;
+      const box = el('div', { className: 'event' + (event.done ? ' done' : '') + (event.end - event.start === 30 ? ' short' : '') });
+      box.style.cssText = `top:${(event.start - 420) / 30 * SLOT_HEIGHT + 1}px;height:${(event.end - event.start) / 30 * SLOT_HEIGHT - 2}px;left:calc(${lane / group.count * 100}% + 3px);width:calc(${100 / group.count}% - 6px)`;
       const check = el('input', { type: 'checkbox', checked: event.done }); check.setAttribute('aria-label', `${event.title} 완료`);
       check.onchange = () => { event.done = check.checked; box.classList.toggle('done', event.done); save(); };
       const edit = el('button', { className: 'event-edit' }, el('span', { className: 'event-title', textContent: event.title }), el('span', { className: 'event-time', textContent: `${time(event.start)}–${time(event.end)}` }));
-      edit.setAttribute('aria-label', `${event.title} 수정`); edit.onclick = () => openEvent(i, event.start, event);
+      edit.title = `${event.title} · ${time(event.start)}–${time(event.end)}`; edit.setAttribute('aria-label', `${event.title} 수정`); edit.onclick = () => openEvent(i, event.start, event);
       box.append(check, edit); col.append(box);
     }
     $('days').append(col);
